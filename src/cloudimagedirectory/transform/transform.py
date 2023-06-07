@@ -291,3 +291,22 @@ class TransformerIdxListImageNames(Transformer):
         results.sort()
 
         return [connection.DataEntry("v1/idx/list/image-names", results)]
+
+
+
+class TransformerV2All(Transformer):
+    """Genearate list of all image details."""
+
+    def run(self, data):
+        """Sort the raw data."""
+        # NOTE: Verify that the data is not raw.
+        entries = [x for x in data if not x.is_raw() and not x.is_provided_by("idx")]
+
+        results = []
+
+        for entry in entries:
+            results.append(entry.content)
+
+        results.sort(key=lambda x: x["name"], reverse=False)
+
+        return [connection.DataEntry("v2/all", results)]
