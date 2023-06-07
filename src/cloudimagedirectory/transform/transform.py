@@ -58,7 +58,6 @@ class Pipeline:
 
         return results
 
-
 class Transformer:
     """Base class for transforming raw image data."""
 
@@ -301,7 +300,6 @@ class TransformerV2All(Transformer):
         """Sort the raw data."""
         # NOTE: Verify that the data is not raw.
         entries = [x for x in data if not x.is_raw() and not x.is_provided_by("idx")]
-
         results = []
 
         for entry in entries:
@@ -310,3 +308,4 @@ class TransformerV2All(Transformer):
         results.sort(key=lambda x: x["name"], reverse=False)
 
         return [connection.DataEntry("v2/all", results)]
+    

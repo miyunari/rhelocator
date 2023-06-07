@@ -87,6 +87,7 @@ def run(
     results = pipeline.run(filenames)
 
     for result in results:
+        
         result.filename = destination_path + "/" + result.filename
         if not result.is_raw():
             origin_connection.put_content(result)
